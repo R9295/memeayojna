@@ -1,0 +1,17 @@
+adium-theme-ubuntu==0.3.4
+bcrypt==3.1.2
+cffi==1.9.1
+click==6.7
+Flask==0.12
+gyp==0.1
+itsdangerous==0.24
+Jinja2==2.9.5
+MarkupSafe==0.23
+pycparser==2.17
+pymongo==3.4.0
+PyQRCode==1.2.1
+six==1.10.0
+ubuntuone-client-data==14.4
+unity-lens-photos==1.0
+virtualenv==15.1.0
+Werkzeug==0.11.15
