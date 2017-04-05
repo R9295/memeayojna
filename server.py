@@ -15,9 +15,7 @@ import datetime
 
 #Connecting to DB
 client = MongoClient()
-db = client.neem_tree
-
-
+db = client.meme_yojna
 
 
 ph = PasswordHasher()
@@ -32,19 +30,34 @@ app.config['UPLOADED_PHOTOS_DEST'] = 'static/img'
 
 @app.route('/')
 def home():
-	return 'XD'
+	db.memes.find()
+	return render_template('home.html')
 
-@app.route('/add')
+@app.route('/add', methods=['GET','POST'])
 def add_meme():
-	pass
 
-@app.route('/admin')
+	if request.method == 'POST':
+
+		filename = photos.save(request.files['meme'])
+		meme = {
+		'meme': filename,
+		'approved': 'false',
+		'approved_by': None,
+		'when_uploaded':
+		}
+		db.memes.insert_one(meme)
+		meme = db.memes.find_one({'meme':filename})
+		return redirect('/%s'%(meme['_id']))
+	return render_template('add_meme.html')
+
+@app.route('/admin', methods=['GET','POST'])
 def admin():
-	pass
+	return render_template('admin.html')
 
 @app.route('/<id>')
 def individual_meme(id):
-	pass
+	meme = db.memes.find_one({'_id': ObjectId(id)})
+	return render_template('individual_meme.html', meme=meme)
 	
 
 
